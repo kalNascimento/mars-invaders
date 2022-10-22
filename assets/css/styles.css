@@ -1,0 +1,112 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background-color: black;
+    overflow: hidden;
+}
+
+main {
+    height: 100vh;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-direction: column;
+}
+
+.title_img {
+    display: block;
+    margin: 0 auto;
+    width: 30%;
+    animation: title 4s;
+}
+
+.menu {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.menu a {
+    margin: 8px;
+    width: 300px;
+    height: 50px;
+}
+
+#start {
+    background-image: url('../img/start_game.svg');
+    background-size: 50%;
+    background-repeat: no-repeat;
+    background-position: center;
+    animation: menuBar 8s;
+}
+
+#about {
+    background-image: url('../img/about.svg');
+    background-size: 25%;
+    background-repeat: no-repeat;
+    background-position: center;
+    animation: menuBar 8s;
+}
+
+#start:hover {
+    background-image: url('../img/start_game_hover.svg');
+    background-size: 50%;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+#about:hover {
+    background-image: url('../img/about_hover.svg');
+    background-size: 25%;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+.planet_img {
+    display: block;
+    margin: 0 auto;
+    width: 60%;
+    animation: planet 2s;
+}
+
+
+@keyframes title {
+    0% {
+        opacity: 0;
+    }
+    20% {
+        opacity: 0;
+    }
+
+    100% {
+        opacity: 1;
+    }
+}
+
+@keyframes planet {
+    0% {
+        opacity: 0;
+    }
+
+    100% {
+        opacity: 1;
+    }
+}
+
+@keyframes menuBar {
+    0% {
+        opacity: 0;
+    }
+    30% {
+        opacity: 0;
+    }
+
+    100% {
+        opacity: 1;
+    }
+}
