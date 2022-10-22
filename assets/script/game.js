@@ -37,6 +37,9 @@ main.addEventListener('keypress', (event) => {
     if(key == 'Enter' && !enterCount){
         enterCount = true;
         startGame();
+    }
+
+    if(enterCount && key == " ") {
         AlienShoot(0, 15, 40);
         AlienShoot(0, 15, 60);
     }
