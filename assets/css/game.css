@@ -23,6 +23,11 @@ body {
     top: 0;
 }
 
+.board #timer {
+    padding: 16px;
+    color: white;
+}
+
 .help {
     display: flex;
     flex-direction: column;

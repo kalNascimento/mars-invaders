@@ -9,7 +9,12 @@ const board = document.getElementById('board');
 const naveRender = document.getElementById('naveRender'); //adicionar animação de morte
 const main = document.body;
 
+let statusGame = false;
 let enterCount = false;
+let timerStatus = false;
+let timer = 0;
+let alienScore = 0;
+let score = 0;
 
 let nave = {
     id: document.getElementById("nave"),
@@ -39,31 +44,57 @@ main.addEventListener('keypress', (event) => {
         startGame();
     }
 
-    if(enterCount && key == " ") {
+    if(key == " " && enterCount) {
         AlienShoot(0, 15, 40);
         AlienShoot(0, 15, 60);
+        enterCount = false
     }
     
     setTimeout(() => {
         keySpace.setAttribute("src", "./assets/img/key_space.svg");
-    }, 200)
-    
+    }, 200);
 });
+
+setInterval(() => {
+    timer++;
+    document.getElementById('timer').innerHTML = "timer: " + timer + 's';
+}, 1000)
 
 // Function
 function startGame(){
     tittle.style.display = 'none'
     nave.id.style.opacity = '1';
-    hpPoints.innerHTML = "HP: " + nave.hp;
     board.style.display = 'flex';
+    hpPoints.innerHTML = "HP: " + nave.hp;
+    document.getElementById('timer').innerHTML = "timer: " + timer + 's';
+    
     setTimeout(() => {
-        board.style.opacity = '0.5'
+        board.style.opacity = '0.8'
     }, 5000)
 
     for(let i = 1; i <= 16; i++){
         let show  = document.getElementById(`alien${i}`)
         show.style.display = 'block';
     }
+}
+
+function saveScore(bool) { 
+    let timerAtual = timer;
+    let hpAtual = nave.hp;
+
+    if (hpAtual <= 0) {
+        hpAtual = 1;
+    }
+
+    for(let i = 1; i <= 16; i++){
+        let show  = document.getElementById(`alien${i}`)
+        if (show.style.display == "block") {
+            alienScore++
+        }
+    }
+    if (!bool) score = (16 - alienScore) * timerAtual * 10 * hpAtual;
+    
+    console.log(score);
 }
 
 function sleep(ms) {
@@ -110,7 +141,7 @@ function MoveNave(keyPress) {
         keyD.setAttribute("src", "./assets/img/key_d.svg");
     }
 
-    if(keyPress == ' ' && enterCount){
+    if(keyPress == ' '){
         shootingNave();
         keySpace.setAttribute("src", "./assets/img/key_space_hover.svg");
     }
@@ -124,6 +155,9 @@ function DeathNave(alien) {
             alien.style.top = '78px'
             nave.hp--;
             hpPoints.innerHTML = "HP: " + nave.hp;
+            if (nave.hp < 2) {
+                hpPoints.style.color = 'red';
+            }
         }
     }
 }
@@ -159,7 +193,8 @@ function renderingAlien() {
 
 async function AlienShoot(min, max, time) {
     let count = 0;
-    while(nave.hp >= 0){
+    
+    while(nave.hp >= 0 && statusGame == false){
         let random = Math.floor(Math.random() * (max - min) + min);
         while (random < min || random == 0) {
             random = Math.floor(Math.random() * (max - min) + min);
@@ -168,7 +203,6 @@ async function AlienShoot(min, max, time) {
                 break;
             }
         }
-
         let alien = document.getElementById(`alien${random}shoot`)
         let alien2 = document.getElementById(`alien${random}`)
 
@@ -176,12 +210,14 @@ async function AlienShoot(min, max, time) {
             random = Math.floor(Math.random() * (max - min) + min);
             alien = document.getElementById(`alien${random}shoot`)
             alien2 = document.getElementById(`alien${random}`)
-            console.log(random)
             count++;
-            if (count >= 10) {
+            if (count >= 10 && statusGame == false) {
+                saveScore();
+                statusGame = true;
                 setTimeout(() => {
                     location = "./youWins.html";
                 }, 2000);
+                count = 100;
                 nave.hp = 1;
                 break;
             }
@@ -191,19 +227,22 @@ async function AlienShoot(min, max, time) {
             alien.style.display = 'block';
             alien.style.top = `${alien.offsetTop += 20}px`;
             count = 0;
-            console.log(nave.hp)
             DeathNave(alien);
             await sleep(time);
         }
+
         if(alien.offsetTop >= 0){
             alien.style.display = `none`
             alien.style.top = '78px'
         }
-        if(nave.hp <= 0 && count < 10){
+
+        if(nave.hp <= 0 && count < 10 && statusGame == false){
             nave.id.innerHTML = "";
+            saveScore()
+            statusGame = true;
             setTimeout(() => {
                 location = "./youDie.html";
-            }, 2000);
+            }, 4000);
         }
     }
 }
@@ -226,7 +265,6 @@ function DeathAlien(alien){
         }
     }else {
         if(nave.shoot.top > 40 && nave.shoot.top <= 104){
-            console.log('error')
             alien.style.display = 'none';
             nave.shoot.top = -1;
         }
