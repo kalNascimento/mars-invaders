@@ -1,0 +1,59 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+body {
+    background-color: black;
+}
+
+h1 {
+    padding: 64px 0 16px 0;
+    color: white;
+}
+
+.container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-top: 100px;
+}
+
+.container img {
+    width: 600px;
+}
+
+input {
+    border: none;
+}
+.container input,
+.container button {
+    background-color: black;
+    border: 2px solid white;
+    color: white;
+    font-size: 18px;
+    padding: 8px 16px;
+    margin: 16px;
+}
+
+.container input:focus {
+    border-color: #AC3232;
+}
+
+#save {
+    width: 200px;
+    height: 50px;
+    padding: 0 8px;
+    background-image: url("../img/score_btn.svg");
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: 90%;
+}
+
+#save:hover {
+    background-image: url("../img/score_btn_hover.svg");
+    border: 2px solid #AC3232;
+}

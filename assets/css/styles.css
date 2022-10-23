@@ -2,6 +2,7 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+    font-family: Arial, Helvetica, sans-serif;
 }
 
 body {
@@ -14,6 +15,30 @@ main {
     display: flex;
     justify-content: space-between;
     align-items: center;
+    flex-direction: column;
+}
+
+.scoreBoard {
+    position: absolute;
+    top: 0;
+    left: 0;
+    margin: 32px;
+    border: 2px solid white;
+    color: white;
+    padding-bottom: 16px;
+    animation: menuBar 6s;
+}
+
+.scoreBoard h2 {
+    padding: 16px 8px;
+}
+
+.scoreBoard p {
+    padding: 4px 8px;
+}
+
+#score {
+    display: flex;
     flex-direction: column;
 }
 
@@ -53,6 +78,14 @@ main {
     animation: menuBar 6s;
 }
 
+#return {
+    background-image: url('../img/return.svg');
+    background-size: 60%;
+    background-repeat: no-repeat;
+    background-position: center;
+    animation: menuBar 6s;
+}
+
 #start:hover {
     background-image: url('../img/start_game_hover.svg');
     background-size: 50%;
@@ -67,13 +100,20 @@ main {
     background-position: center;
 }
 
+#return:hover {
+    background-image: url('../img/return_hover.svg');
+    background-size: 60%;
+    background-repeat: no-repeat;
+    background-position: center;
+    animation: menuBar 6s;
+}
+
 .planet_img {
     display: block;
     margin: 0 auto;
     width: 60%;
     animation: planet 2s;
 }
-
 
 @keyframes title {
     0% {

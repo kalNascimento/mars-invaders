@@ -14,7 +14,7 @@ let enterCount = false;
 let timerStatus = false;
 let timer = 0;
 let alienScore = 0;
-let score = 0;
+let score = [];
 
 let nave = {
     id: document.getElementById("nave"),
@@ -81,6 +81,8 @@ function startGame(){
 function saveScore(bool) { 
     let timerAtual = timer;
     let hpAtual = nave.hp;
+    let scores = localStorage.getItem('scores');
+    score.push(scores);
 
     if (hpAtual <= 0) {
         hpAtual = 1;
@@ -92,9 +94,9 @@ function saveScore(bool) {
             alienScore++
         }
     }
-    if (!bool) score = (16 - alienScore) * timerAtual * 10 * hpAtual;
-    
-    console.log(score);
+    let yourScore = (16 - alienScore) * 1000 * hpAtual / timerAtual
+    if (!bool) score.push(yourScore.toFixed(2));
+    localStorage.setItem("scores", score);
 }
 
 function sleep(ms) {

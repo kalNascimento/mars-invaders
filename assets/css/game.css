@@ -133,7 +133,7 @@ body {
 }
 
 .turbina {
-    color: red;
+    color: #AC3232;
     z-index: -1;
     letter-spacing: 16px;
 }
@@ -149,7 +149,7 @@ body {
 }
 
 .alien {
-    color: red;
+    color: #AC3232;
     position: absolute;
     top: 60px;
     line-height: 20px;
@@ -173,7 +173,7 @@ body {
 }
 
 .debug {
-    border: 1px solid red;
+    border: 1px solid #AC3232;
 }
 
 .nave-alien {
