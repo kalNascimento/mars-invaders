@@ -94,7 +94,9 @@ function saveScore(bool) {
             alienScore++
         }
     }
-    let yourScore = (16 - alienScore) * 1000 * hpAtual / timerAtual
+
+    let yourScore = (16 - alienScore) * 100 * hpAtual;
+
     if (!bool) score.push(yourScore.toFixed(2));
     localStorage.setItem("scores", score);
 }
@@ -244,7 +246,7 @@ async function AlienShoot(min, max, time) {
             statusGame = true;
             setTimeout(() => {
                 location = "./youDie.html";
-            }, 4000);
+            }, 2000);
         }
     }
 }
